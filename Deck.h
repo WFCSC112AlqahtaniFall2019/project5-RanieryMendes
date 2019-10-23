@@ -5,11 +5,14 @@
 
 class Deck {
 
+public:
+    ~Deck();
 private:
     Card* cards;
-    int arraySize;
-    int cardsLeft;
+    int arraySize = 50;
+    int cardsLeft ;
 };
+
 
 
 #endif //BLINDMANSBLUFF_DECK_H

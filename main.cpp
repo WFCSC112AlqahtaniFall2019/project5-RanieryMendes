@@ -7,27 +7,41 @@
 using namespace std;
 
 int main() {
-    srand(time(0));
+
     cout << "Welcome to Blind Man's Bluff" << endl << endl;
     bool play, invalid, guessedHigher;
     string response;
-    int compValue, userValue, nWin = 0, nLoss = 0, nTie = 0;
 
-    srand(time(NULL));
+    int compValue, userValue, nWin = 0, nLoss = 0, nTie = 0;
 
     play = true;
 
     Card computer;
     Card player;
+    string test = player.getCard();
+    cout << test << endl;
     string computerValue;
     string playerValue;
-    while(play) {
-        // assign values to computer and user
-        //        //compValue = rand() % 52;
-        computerValue = computer.showCard();
-        playerValue = player.showCard();
+    srand(time(0));
 
-       // userValue = rand() % 52;
+
+    while(play) {
+
+        //get random values for being elements of Player card's suit array and rank array
+        int rankPlayer; int suitPlayer;
+        rankPlayer = rand()%13;
+        suitPlayer = rand()%4;
+        //set the Player's card with the suit and rank obtained above
+        player.setCard(rankPlayer, suitPlayer);
+        //Put in a string the Player's card info (suit and rank)
+        playerValue = player.getCard();
+
+        int rankComp; int suitComp;
+        rankComp = rand()%13;
+        suitComp = rand()%4;
+        computer.setCard(rankComp, suitComp);
+        computerValue = computer.getCard();
+
 
         // get user's bet
         cout << "Computer's value is " << computerValue << endl;
@@ -40,11 +54,13 @@ int main() {
                 // continue playing
                 guessedHigher = true;
                 invalid = false;
-            } else if (toupper(response.at(0)) == 'L') {
+            }
+            else if (toupper(response.at(0)) == 'L') {
                 // break out of while(play) loop
                 guessedHigher = false;
                 invalid = false;
-            } else {
+            }
+            else {
                 // invalid response, ask again
                 cout << "Invalid response..." << endl;
                 invalid = true;
@@ -57,29 +73,21 @@ int main() {
             nWin++;
         }
 
-        /*if((compValue < userValue && guessedHigher) || (compValue > userValue && !guessedHigher)) {
-            cout << "Great! You're right:" << endl;
-            nWin++;
-        } */
-        else if((player > computer && !guessedHigher) || !(player > computer && guessedHigher)){
+        else if((player > computer && !guessedHigher) || (!(player > computer) && guessedHigher)){
             cout << "Sorry, you're wrong:" << endl;
             nLoss++;
-
-}
-       /* else if((compValue > userValue && guessedHigher) || (compValue < userValue && !guessedHigher)) {
-            cout << "Sorry, you're wrong:" << endl;
-            nLoss++;
-        }*/
+        }
 
         else {
             cout << "It's a tie:" << endl;
             nTie++;
         }
 
-        cout << "\tyour value is " << playerValue << endl;
+        cout << "\tYour value is " << playerValue << endl;
 
         // ask user to play again
         invalid = true;
+
         while(invalid) {
             cout << "Play again? (Y/N)" << endl;
             cin >> response;
@@ -87,11 +95,14 @@ int main() {
                 // continue playing
                 play = true;
                 invalid = false;
-            } else if (toupper(response.at(0)) == 'N') {
+            }
+            else if (toupper(response.at(0)) == 'N') {
                 // break out of while(play) loop
                 play = false;
                 invalid = false;
-            } else {
+            }
+
+            else {
                 // invalid response, ask again
                 cout << "Invalid response..." << endl;
                 invalid = true;

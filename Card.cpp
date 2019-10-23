@@ -1,16 +1,15 @@
 #include "Card.h"
 #include <string>
+#include <random>
 #include <ctime>
 
 
-
 Card::Card() {
-    srand(time(0));
-    int suitElement = rand()%4;
-    int rankElement = rand()%13;
 
+    srand(time(NULL));
+    int suitElement = random()%4;
+    int rankElement = random()%13;
     this->rankCard = suits[suitElement];
-
     this->suitCard = ranks[rankElement];
 
 }
@@ -18,23 +17,30 @@ Card::Card() {
 Card ::Card(string rank, string suits) {
 
     this->rankCard = rank;
-    this ->suitCard = suits;
+    this->suitCard = suits;
 
 }
 
-string Card ::showCard() {
+
+void Card ::setCard(int rank, int suit) {
+
+    this->rankCard = ranks[rank];
+
+    this->suitCard = suits[suit];
+
+}
+
+string Card :: getCard() {
 
     string fullSentence;
-    fullSentence.append(this->suitCard);
-    fullSentence.append(" of ");
     fullSentence.append(this->rankCard);
-
+    fullSentence.append(" of ");
+    fullSentence.append(this->suitCard);
 
     return fullSentence;
 }
 
 bool Card ::operator>(Card tmp) {
-
 
     //Check if user's card  > computer's card
     if(this->rankCard > tmp.rankCard) {
