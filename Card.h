@@ -16,12 +16,14 @@ class Card {
 public:
     Card ();
     Card (string rank, string suits);
-    string getCard ();
+    void formCard ();
     bool operator >(Card tmp);
     void setCard(int rank, int suits);
+    void showValueofCard ();
 
 
 private:
+    string fullSentence;
     string suitCard;
     string rankCard;
 };

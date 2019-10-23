@@ -15,37 +15,32 @@ int main() {
     int compValue, userValue, nWin = 0, nLoss = 0, nTie = 0;
 
     play = true;
-
-    Card computer;
-    Card player;
-    string test = player.getCard();
-    cout << test << endl;
-    string computerValue;
-    string playerValue;
     srand(time(0));
-
+    Deck game;
+    Deck discardPile;
+    game.populate();
+    game.shuffle();
+    cout << "create card objects" << endl;
+    Card playerCard;
+    Card computerCard;
+    cout << "playerCard and computerCard" << endl;
 
     while(play) {
 
-        //get random values for being elements of Player card's suit array and rank array
-        int rankPlayer; int suitPlayer;
-        rankPlayer = rand()%13;
-        suitPlayer = rand()%4;
-        //set the Player's card with the suit and rank obtained above
-        player.setCard(rankPlayer, suitPlayer);
-        //Put in a string the Player's card info (suit and rank)
-        playerValue = player.getCard();
-
-        int rankComp; int suitComp;
-        rankComp = rand()%13;
-        suitComp = rand()%4;
-        computer.setCard(rankComp, suitComp);
-        computerValue = computer.getCard();
-
+        cout<< "Im in the while loop" << endl;
+         game.shuffle();
+         playerCard = game.getCard();
+        if(discardPile.addToDiscardPile()){ play = false;}
+         computerCard = game.getCard();
+        if(discardPile.addToDiscardPile()){ play = false;}
+         cout << "Im here " << endl;
 
         // get user's bet
-        cout << "Computer's value is " << computerValue << endl;
+        cout << "Computer's value is " ;
+        computerCard.showValueofCard();
+        cout << endl;
         invalid = true;
+
         while(invalid) {
             cout << "Do you think your number is higher or lower? (H/L)" << endl;
             cin >> response;
@@ -68,12 +63,12 @@ int main() {
         }
 
         // determine outcome
-        if((player > computer && guessedHigher) || (!(player > computer) && !guessedHigher)){
+        if((playerCard > computerCard && guessedHigher) || (!(playerCard > computerCard) && !guessedHigher)){
             cout << "Great! You're right:" << endl;
             nWin++;
         }
 
-        else if((player > computer && !guessedHigher) || (!(player > computer) && guessedHigher)){
+        else if((playerCard > computerCard && !guessedHigher) || (!(playerCard > computerCard) && guessedHigher)){
             cout << "Sorry, you're wrong:" << endl;
             nLoss++;
         }
@@ -83,7 +78,9 @@ int main() {
             nTie++;
         }
 
-        cout << "\tYour value is " << playerValue << endl;
+        cout << "\tYour value is ";
+        playerCard.showValueofCard();
+        cout << endl;
 
         // ask user to play again
         invalid = true;

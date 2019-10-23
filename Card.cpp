@@ -2,6 +2,8 @@
 #include <string>
 #include <random>
 #include <ctime>
+#include <iostream>
+
 
 
 Card::Card() {
@@ -11,6 +13,7 @@ Card::Card() {
     int rankElement = random()%13;
     this->rankCard = suits[suitElement];
     this->suitCard = ranks[rankElement];
+    cout << "Card Constructor called" << endl;
 
 }
 
@@ -28,16 +31,23 @@ void Card ::setCard(int rank, int suit) {
 
     this->suitCard = suits[suit];
 
+    formCard();
+
 }
 
-string Card :: getCard() {
+void Card :: formCard() {
 
-    string fullSentence;
+
     fullSentence.append(this->rankCard);
     fullSentence.append(" of ");
     fullSentence.append(this->suitCard);
+    cout << fullSentence <<  " " << endl;
 
-    return fullSentence;
+}
+
+void Card ::showValueofCard (){
+
+    cout << fullSentence;
 }
 
 bool Card ::operator>(Card tmp) {
@@ -46,7 +56,9 @@ bool Card ::operator>(Card tmp) {
     if(this->rankCard > tmp.rankCard) {
 
         return true;
-    } else{
+    }
+
+    else{
         return false;
     }
 }
