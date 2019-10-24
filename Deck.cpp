@@ -1,36 +1,36 @@
 #include "Deck.h"
 #include <iostream>
-#include <ctime>
+#include <time.h>
 using namespace std;
 
 //constructor - initialize all private variables
 Deck ::Deck() {
 
-    arraySize = 52;
-    cards = new Card [arraySize];
-    cardsLeft = 0;
+    arraySize = 52; //the array size is the amount of cards in the deck
+    cards = new Card [arraySize];  //dynamically allocate array
+    cardsLeft = 0; // variable that will store the number of cards left in the deck
 
 }
 //destructor - deletes pointer of array
 Deck::~Deck() {
     cout << "Deck Destructor Called" << endl;
-    //delete [] this->cards;
-    //this -> cards = nullptr;
+    // delete [] cards;
+   //  cards = nullptr;
 
 }
 
 // populate the deck with 52 cards - 4 suits with 13 cards each
 void Deck ::populate() {
 
-    int k = 0; // element of card array
+    int k = 0; // index of cards din array
     for (int j = 0; j < 4; j++){ // for loop that set the suits
     for (int i = 0; i < 13; i++) { // for loop that set the ranks
             cards[k].setCard(i,j);
-            k++;
+            k++; //update index of cards dynamic array
             cardsLeft++; // increments card left until it
         }
     }
-    cardsLeft--;
+    cardsLeft--;// decrement once in order to avoid unreachable memory location in later function calls involving the array
 
 }
 
@@ -68,29 +68,26 @@ Deck ::Deck(const Deck &origClass) {
     *cards = *(origClass.cards);
 }
 
-// member function that adds a card to the deck (it returns false if there is no physical space in the deck)
+// member function that adds a card to the discard deck (it returns false if there is no physical space in the deck)
 bool Deck ::addToDiscardPile(Deck game) {
 
+    //if condition to return false when all cards were taken from the deck( 0 -51 = 52 cards)
     if(this->cardsLeft == 51) {
 
         return false;
     }
 
+    //while there are cards to be drown from the deck
     else{
-
-        this->cardsLeft++;
-
-
-        this->cards[cardsLeft] = game.cards[cardsLeft];
-
-
-
+        //cardsLeft in this function represents the number of cards in the discard deck
+        this->cardsLeft++; // increment the number of cards in the discard pile
+        this->cards[cardsLeft] = game.cards[cardsLeft]; //store in the discard pile the card that was taken from the
         return true;
     }
 
 }
 
-
+// copy and swap idiom
 Deck Deck::operator=(Deck rhs){
     swap(*this, rhs);
     return *this;

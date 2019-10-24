@@ -15,24 +15,42 @@ int main() {
     int nWin = 0, nLoss = 0, nTie = 0;
 
     play = true;
-    srand(time(0));
+
+    //create Deck object from which the cards will withdraw
     Deck game;
+
+    //create Deck object to which the cards that were withdrawn will be discarted
     Deck discardPile;
+
+    //populate the Deck with the 52 cards
     game.populate();
+
+    //shuffle the deck before game
     game.shuffle();
+
+    //create Card object that will represent the player
     Card playerCard;
+
+    //create Card object that will represent the computer
     Card computerCard;
 
     while(play) {
-
+        // get a card from the deck and "give to the player"
         playerCard = game.getCard();
+
+        //check if discard Pile is full  and therefore there are no more cards to be withdrawn -->  game is over
         if (discardPile.addToDiscardPile(game) == false) { play = false; }
+
+        // get a card from the deck and "give to the computer"
         computerCard = game.getCard();
+
+        //check if discard Pile is full  and therefore there are no more cards to be withdrawn -->  game is over
         if (discardPile.addToDiscardPile(game) == false) { play = false; }
 
 
         // get user's bet
         cout << "Computer's value is ";
+        // print the Card value (show  the syntax "rank of suit")
         computerCard.showValueOfCard();
         cout << endl;
         invalid = true;

@@ -21,7 +21,10 @@ public:
     void setCard(int rank, int suits);
     void showValueOfCard ();
 
+
 private:
+    int storeSuit;
+    int storeRank;
     string fullSentence;
     string suitCard;
     string rankCard;
