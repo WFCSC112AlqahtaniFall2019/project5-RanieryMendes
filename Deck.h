@@ -5,17 +5,26 @@
 class Deck {
 
 public:
-    void populate();
+
+    //constructor
     Deck ();
+    //populate the deck
+    void populate();
+    //destructor
     ~Deck();
+    //copy constructor
     Deck (const Deck& origClass);
+    // copy assignment operator
     Deck operator=(Deck rhs);
+    //shuffle the cards
     void shuffle ();
-    void setCard(); // set the card represented by an element in the array
+    // set the card represented by an element in the array
+    void setCard();
+    // member function that removes a card from the deck and returns its value, putting it into a Card object;
     Card getCard ();
-    bool addToDiscardPile ();
-    int trackPile = 0;
-    void remove ();
+    // member function that adds a card to the deck (it returns false if there is no physical space in the deck).
+    bool addToDiscardPile (Deck game);
+
 
 private:
     Card* cards;

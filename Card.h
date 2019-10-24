@@ -19,8 +19,7 @@ public:
     void formCard ();
     bool operator >(Card tmp);
     void setCard(int rank, int suits);
-    void showValueofCard ();
-
+    void showValueOfCard ();
 
 private:
     string fullSentence;

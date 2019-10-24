@@ -13,7 +13,7 @@ Card::Card() {
     int rankElement = random()%13;
     this->rankCard = suits[suitElement];
     this->suitCard = ranks[rankElement];
-    cout << "Card Constructor called" << endl;
+
 
 }
 
@@ -37,15 +37,15 @@ void Card ::setCard(int rank, int suit) {
 
 void Card :: formCard() {
 
-
+//form the string that name the card
     fullSentence.append(this->rankCard);
     fullSentence.append(" of ");
     fullSentence.append(this->suitCard);
-    cout << fullSentence <<  " " << endl;
 
 }
 
-void Card ::showValueofCard (){
+//return the string that exhbits the suit and rank of the card.
+void Card ::showValueOfCard (){
 
     cout << fullSentence;
 }
@@ -53,7 +53,7 @@ void Card ::showValueofCard (){
 bool Card ::operator>(Card tmp) {
 
     //Check if user's card  > computer's card
-    if(this->rankCard > tmp.rankCard) {
+    if (this->rankCard > tmp.rankCard) {
 
         return true;
     }

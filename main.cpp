@@ -12,7 +12,7 @@ int main() {
     bool play, invalid, guessedHigher;
     string response;
 
-    int compValue, userValue, nWin = 0, nLoss = 0, nTie = 0;
+    int nWin = 0, nLoss = 0, nTie = 0;
 
     play = true;
     srand(time(0));
@@ -20,28 +20,24 @@ int main() {
     Deck discardPile;
     game.populate();
     game.shuffle();
-    cout << "create card objects" << endl;
     Card playerCard;
     Card computerCard;
-    cout << "playerCard and computerCard" << endl;
 
     while(play) {
 
-        cout<< "Im in the while loop" << endl;
-         game.shuffle();
-         playerCard = game.getCard();
-        if(discardPile.addToDiscardPile()){ play = false;}
-         computerCard = game.getCard();
-        if(discardPile.addToDiscardPile()){ play = false;}
-         cout << "Im here " << endl;
+        playerCard = game.getCard();
+        if (discardPile.addToDiscardPile(game) == false) { play = false; }
+        computerCard = game.getCard();
+        if (discardPile.addToDiscardPile(game) == false) { play = false; }
+
 
         // get user's bet
-        cout << "Computer's value is " ;
-        computerCard.showValueofCard();
+        cout << "Computer's value is ";
+        computerCard.showValueOfCard();
         cout << endl;
         invalid = true;
 
-        while(invalid) {
+        while (invalid) {
             cout << "Do you think your number is higher or lower? (H/L)" << endl;
             cin >> response;
 
@@ -49,13 +45,11 @@ int main() {
                 // continue playing
                 guessedHigher = true;
                 invalid = false;
-            }
-            else if (toupper(response.at(0)) == 'L') {
+            } else if (toupper(response.at(0)) == 'L') {
                 // break out of while(play) loop
                 guessedHigher = false;
                 invalid = false;
-            }
-            else {
+            } else {
                 // invalid response, ask again
                 cout << "Invalid response..." << endl;
                 invalid = true;
@@ -63,53 +57,57 @@ int main() {
         }
 
         // determine outcome
-        if((playerCard > computerCard && guessedHigher) || (!(playerCard > computerCard) && !guessedHigher)){
+        if ((playerCard > computerCard && guessedHigher) || (!(playerCard > computerCard) && !guessedHigher)) {
             cout << "Great! You're right:" << endl;
             nWin++;
-        }
-
-        else if((playerCard > computerCard && !guessedHigher) || (!(playerCard > computerCard) && guessedHigher)){
+        } else if ((playerCard > computerCard && !guessedHigher) || (!(playerCard > computerCard) && guessedHigher)) {
             cout << "Sorry, you're wrong:" << endl;
             nLoss++;
-        }
-
-        else {
+        } else {
             cout << "It's a tie:" << endl;
             nTie++;
         }
 
         cout << "\tYour value is ";
-        playerCard.showValueofCard();
+        playerCard.showValueOfCard();
         cout << endl;
+        game.shuffle();
+
 
         // ask user to play again
         invalid = true;
+        if (play == false) {
+            // output stats
+            cout << "Thanks for playing!" << endl;
+            cout << "Your record was " << nWin << "-" << nLoss << "-" << nTie << " (W-L-T)" << endl;
+            invalid = false;
+        }
 
-        while(invalid) {
+        while (invalid) {
             cout << "Play again? (Y/N)" << endl;
             cin >> response;
             if (toupper(response.at(0)) == 'Y') {
                 // continue playing
                 play = true;
                 invalid = false;
-            }
-            else if (toupper(response.at(0)) == 'N') {
+            } else if (toupper(response.at(0)) == 'N') {
                 // break out of while(play) loop
                 play = false;
                 invalid = false;
-            }
-
-            else {
+            } else {
                 // invalid response, ask again
                 cout << "Invalid response..." << endl;
                 invalid = true;
             }
         }
-    }
 
-    // output stats
-    cout << "Thanks for playing!" << endl;
-    cout << "Your record was " << nWin << "-" << nLoss << "-" << nTie << " (W-L-T)" << endl;
+    }
+    if (play == false) {
+        // output stats
+        cout << "Thanks for playing!" << endl;
+        cout << "Your record was " << nWin << "-" << nLoss << "-" << nTie << " (W-L-T)" << endl;
+        invalid = false;
+    }
 
     return 0;
 }
