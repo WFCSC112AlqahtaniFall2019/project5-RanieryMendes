@@ -14,7 +14,7 @@ Deck ::Deck() {
 //destructor - deletes pointer of array
 Deck::~Deck() {
     cout << "Deck Destructor Called" << endl;
-    // delete [] cards;
+     delete [] cards;
    //  cards = nullptr;
 
 }
@@ -53,8 +53,9 @@ void Deck ::shuffle() {
     //swap the cards
     for (int i = 0; i < numberOfSwaps; i++){
         //securing that the cards that will be swapped are randomly selected
-        int cardA = rand()%cardsLeft;
-        int cardB = rand()%cardsLeft;
+
+        int cardA = rand()%52;
+        int cardB = rand()%52;
         //swap the two random cards selected
         swap(cards[cardA], cards[cardB]);
     }
@@ -63,9 +64,15 @@ void Deck ::shuffle() {
 
 //copy constructor for Deck class
 Deck ::Deck(const Deck &origClass) {
+    cout<<"copy constructor called"<<endl;
+   arraySize=origClass.arraySize;
+   cardsLeft=origClass.cardsLeft;
+    cards = new Card[arraySize];
+    for (int i = 0; i < arraySize ; ++i) {
 
-    cards = new Card;
-    *cards = *(origClass.cards);
+        cards[i] = origClass.cards[i];
+
+    }
 }
 
 // member function that adds a card to the discard deck (it returns false if there is no physical space in the deck)
@@ -89,7 +96,8 @@ bool Deck ::addToDiscardPile(Deck game) {
 
 // copy and swap idiom
 Deck Deck::operator=(Deck rhs){
-    swap(*this, rhs);
+    cout<<"assignment called"<<endl;
+    swap(this->cards, rhs.cards);
     return *this;
 }
 

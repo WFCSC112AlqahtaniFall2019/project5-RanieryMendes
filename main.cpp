@@ -89,7 +89,7 @@ int main() {
         cout << "\tYour value is ";
         playerCard.showValueOfCard();
         cout << endl;
-        game.shuffle();
+
 
 
         // ask user to play again
