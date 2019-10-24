@@ -53,11 +53,16 @@ int main() {
         // print the Card value (show  the syntax "rank of suit")
         computerCard.showValueOfCard();
         cout << endl;
+
+        //set invalid to true to ask what the user's think (higher or lower)
         invalid = true;
 
         while (invalid) {
             cout << "Do you think your number is higher or lower? (H/L)" << endl;
+            //get user's response
             cin >> response;
+
+            // check the user's response and if it's
 
             if (toupper(response.at(0)) == 'H') {
                 // continue playing
@@ -94,9 +99,9 @@ int main() {
 
         // ask user to play again
         invalid = true;
+         //if statement to end game  if player reached 26 rounds
         if (play == false) {
-            // output stats
-            cout << "Thanks for playing!" << endl;
+            cout << "Thanks for playing! There are no more cards on the deck" << endl;
             cout << "Your record was " << nWin << "-" << nLoss << "-" << nTie << " (W-L-T)" << endl;
             invalid = false;
         }

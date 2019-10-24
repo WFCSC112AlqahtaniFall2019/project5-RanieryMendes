@@ -16,7 +16,7 @@ Card::Card() {
 
 }
 
-//general constructor --> assigns the paremeters inserted into the rank and
+//general constructor --> assigns the parameters inserted into the rankCard and suitCard private variables
 
 Card ::Card(string rank, string suits) {
 
@@ -25,17 +25,19 @@ Card ::Card(string rank, string suits) {
 
 }
 
-// It assigns the rank and the suit variables for Card objects. It also stores the index of the const arrays for suits and rank
-// --> they will be used later for comparation
+// This function below assigns the rank and the suit variables for Card objects. It also stores the index of the const arrays for suits and rank
+// --> they will be used later for comparison between cards
 // it is called by the populate function from Deck class
 void Card ::setCard(int rank, int suit) {
 
-    this->storeRank = rank;
-    this->rankCard = ranks[rank];
 
-    this->storeSuit = suit;
-    this->suitCard = suits[suit];
+    this->storeRank = rank; //store the  index of the element's rank for using in comparison
+    this->rankCard = ranks[rank]; //assign the rank
 
+    this->storeSuit = suit; // store the index of the element's suit
+    this->suitCard = suits[suit];//assign the suit
+
+    //call formcard function to build the string with the card's suit and rank
     formCard();
 
 }

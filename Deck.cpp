@@ -15,7 +15,6 @@ Deck ::Deck() {
 Deck::~Deck() {
     cout << "Deck Destructor Called" << endl;
      delete [] cards;
-   //  cards = nullptr;
 
 }
 
@@ -56,6 +55,7 @@ void Deck ::shuffle() {
 
         int cardA = rand()%52;
         int cardB = rand()%52;
+
         //swap the two random cards selected
         swap(cards[cardA], cards[cardB]);
     }
